@@ -85,7 +85,29 @@ app.get("/getusers", authenticateJwt, async (req, res) => {
     catch (err) {
         console.error(err)
     }
-})
+});
+// Filter donors by city and/or blood group
+app.get('/filter', async (req, res) => {
+    const { city, bg } = req.query;
+    const filter = {};
+
+    if (city) {
+        filter.city = city;
+    }
+
+    if (bg) {
+        filter.bg = bg;
+    }
+
+    try {
+        const filteredDonors = await User.find(filter);
+        res.json(filteredDonors);
+    } catch (error) {
+        console.error('Error filtering donors:', error);
+        res.status(500).json({ error: 'Error filtering donors' });
+    }
+});
+
 
 app.listen(3000, () => {
     console.log("app started on port 3000")
