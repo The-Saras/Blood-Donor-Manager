@@ -13,6 +13,21 @@ const Signup = (props) => {
     const [password, setPassword] = useState('');
     const [bg, setBg] = useState('');
     const [city, setCity] = useState('')
+
+    const bloodGroups = [
+        { value: '', label: 'Select a blood group' },
+        { value: 'A+', label: 'A+' },
+        { value: 'A-', label: 'A-' },
+        { value: 'B+', label: 'B+' },
+        { value: 'B-', label: 'B-' },
+        { value: 'AB+', label: 'AB+' },
+        { value: 'AB-', label: 'AB-' },
+        { value: 'O+', label: 'O+' },
+        { value: 'O-', label: 'O-' },
+    ];
+    const handleBloodGroupChange = (event) => {
+        setBg(event.target.value);
+    };
     return (
 
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -40,6 +55,13 @@ const Signup = (props) => {
                         setBg(e.target.value);
                     }}
                 /><br></br>
+                <select value={bg} onChange={handleBloodGroupChange}>
+                    {bloodGroups.map((group) => (
+                        <option key={group.value} value={group.value}>
+                            {group.label}
+                        </option>
+                    ))}
+                </select>
 
                 <TextField id="outlined-ba1sic" label="City" variant="outlined" fullWidth={true} style={{ padding: 5 }}
                     onChange={e => {

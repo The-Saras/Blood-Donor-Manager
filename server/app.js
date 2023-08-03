@@ -87,7 +87,7 @@ app.get("/getusers", authenticateJwt, async (req, res) => {
     }
 });
 // Filter donors by city and/or blood group
-app.get('/filter', async (req, res) => {
+app.get('/filter', authenticateJwt, async (req, res) => {
     const { city, bg } = req.query;
     const filter = {};
 
@@ -101,7 +101,7 @@ app.get('/filter', async (req, res) => {
 
     try {
         const filteredDonors = await User.find(filter);
-        res.json(filteredDonors);
+        res.json({ filteredDonors });
     } catch (error) {
         console.error('Error filtering donors:', error);
         res.status(500).json({ error: 'Error filtering donors' });

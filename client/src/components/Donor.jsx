@@ -1,13 +1,17 @@
 import React from "react"
 import "../App.css"
+import { useNavigate } from "react-router-dom";
 const Donor = (props) => {
+  const navigate = useNavigate()
   return (
     <div>
-      <div class="donor-list">
-        <div class="donor-item">
-          <div class="donor-name">{props.name}</div>
-          <div class="donor-city">{props.city}</div>
-          <div class="donor-blood-group">{props.bg}</div>
+      <div className="donor-list">
+        <div className="donor-item">
+          <div className="donor-name" onClick={() => {
+            navigate("/user")
+          }}>{props.name}</div>
+          <div className="donor-city" >{props.city}</div>
+          <div className="donor-blood-group" >{props.bg}</div>
         </div>
 
 
